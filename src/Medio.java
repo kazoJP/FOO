@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 
-public class Medio extends Jogador{
-    private int recuperacao_bola;
-
-    public Medio(int id, String nome, int resistencia, int destreza, int impulsao, int jogo_cabeça, int remate, int passe, ArrayList<String> historico_clubes, int rb) {
-        super(id, nome, resistencia, destreza, impulsao, jogo_cabeça, remate, passe, historico_clubes);
-        this.recuperacao_bola=rb;
+public class Medio extends Jogador {
+    private int recuperacao;
+    public Medio(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int rec) {
+        super(nomeJ, numeroJ, vel, res, des, imp, cab, rem, p);
+        recuperacao = rec;
     }
 
-    public int getRecuperacao_bola() {
-        return recuperacao_bola;
+    public static Medio parse(String input){
+        String[] campos = input.split(",");
+        return new Medio(campos[0], Integer.parseInt(campos[1]),
+                Integer.parseInt(campos[2]),
+                Integer.parseInt(campos[3]),
+                Integer.parseInt(campos[4]),
+                Integer.parseInt(campos[5]),
+                Integer.parseInt(campos[6]),
+                Integer.parseInt(campos[7]),
+                Integer.parseInt(campos[8]),
+                Integer.parseInt(campos[9]));
     }
 
-    public void setRecuperacao_bola(int recuperacao_bola) {
-        this.recuperacao_bola = recuperacao_bola;
-    }
 }

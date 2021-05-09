@@ -1,22 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Equipa {
-    private int id;
     private String nome;
-    private ArrayList<Jogadores_Equipa> jogadores;
+    private List<Jogador> jogadores;
 
-    public Equipa(int id, String nome, ArrayList<Jogadores_Equipa> jogadores) {
-        this.id = id;
+    public Equipa(String nome) {
         this.nome = nome;
-        //this.jogadores = jogadores;
+        jogadores = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public static Equipa parse(String input){
+        String[] campos = input.split(",");
+        return new Equipa(campos[0]);
     }
 
     public String getNome() {
@@ -27,11 +23,23 @@ public class Equipa {
         this.nome = nome;
     }
 
-    public ArrayList<Jogadores_Equipa> getJogadores() {
-        return jogadores;
+    public void insereJogador(Jogador j) {
+        jogadores.add(j.clone());
     }
 
-    public void setJogadores(ArrayList<Jogadores_Equipa> jogadores) {
+    /*public ArrayList<Jogador> getJogadores() {
+        return jogadores;
+    }*/
+
+    /*public void setJogadores(ArrayList<Jogadores_Equipa> jogadores) {
         this.jogadores = jogadores;
+    }*/
+
+    public String toString(){
+        String r =  "Equipa:" + nome + "\n";
+        for (Jogador j : jogadores){
+            r += j.toString();
+        }
+        return r;
     }
 }

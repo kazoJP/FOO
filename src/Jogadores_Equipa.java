@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class Jogadores_Equipa {
-    private ArrayList<Guarda_Redes> guarda_redes;
+    private ArrayList<GuardaRedes> guarda_redes;
     private ArrayList<Defesa> defesas;
     private ArrayList<Medio> medios;
     private ArrayList<Lateral> laterais;
     private ArrayList<Avancado> avancados;
 
-    public Jogadores_Equipa(ArrayList<Guarda_Redes> guarda_redes, ArrayList<Defesa> defesas, ArrayList<Medio> medios, ArrayList<Lateral> laterais, ArrayList<Avancado> avancados) {
+    public Jogadores_Equipa(ArrayList<GuardaRedes> guarda_redes, ArrayList<Defesa> defesas, ArrayList<Medio> medios, ArrayList<Lateral> laterais, ArrayList<Avancado> avancados) {
         //this.guarda_redes = guarda_redes;
         //this.defesas = defesas;
         //this.medios = medios;
@@ -15,11 +15,11 @@ public class Jogadores_Equipa {
         //this.avancados = avancados;
     }
 
-    public ArrayList<Guarda_Redes> getGuarda_redes() {
+    public ArrayList<GuardaRedes> getGuarda_redes() {
         return guarda_redes;
     }
 
-    public void setGuarda_redes(ArrayList<Guarda_Redes> guarda_redes) {
+    public void setGuarda_redes(ArrayList<GuardaRedes> guarda_redes) {
         this.guarda_redes = guarda_redes;
     }
 
