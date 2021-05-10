@@ -15,7 +15,7 @@ public class Jogo {
     private List<Integer> jogadoresCasa;
     private List<Integer> jogadoresFora;
     Map<Integer, Integer> substituicoesCasa = new HashMap<>();
-    Map<Integer, Integer> substitucoesFora = new HashMap<>();
+    Map<Integer, Integer> substituicoesFora = new HashMap<>();
 
     public Jogo (String ec, String ef, int gc, int gf, LocalDate d,  List<Integer> jc, Map<Integer, Integer> sc,  List<Integer> jf, Map<Integer, Integer> sf){
         equipaCasa = ec;
@@ -26,7 +26,7 @@ public class Jogo {
         jogadoresCasa = new ArrayList<>(jc);
         jogadoresFora = new ArrayList<>(jf);
         substituicoesCasa = new HashMap<>(sc);
-        substitucoesFora = new HashMap<>(sf);
+        substituicoesFora = new HashMap<>(sf);
     }
 
     public Jogo(Jogo game){
@@ -35,7 +35,10 @@ public class Jogo {
         this.golosCasa = getGolosCasa();
         this.golosFora = getGolosFora();
         this.date = LocalDate.now();
-
+        game.jogadoresCasa.forEach(integer -> this.jogadoresCasa.add(integer));
+        game.jogadoresFora.forEach(integer -> this.jogadoresFora.add(integer));
+        game.substituicoesCasa.forEach((k,v) -> this.substituicoesCasa.put(k,v));
+        game.substituicoesFora.forEach((k,v) -> this.substituicoesFora.put(k,v));
     }
 
     public String getEquipaCasa() {

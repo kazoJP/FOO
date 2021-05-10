@@ -12,54 +12,56 @@ import java.util.Map;
 
 public class Parser {
 
-    public static void parse() throws LinhaIncorretaException, LinhaIncorretaException {
+    public static Model parse() throws LinhaIncorretaException, LinhaIncorretaException {
         List<String> linhas = lerFicheiro("/home/josepeixoto/Kazo/poo/FOO/files/output.txt");
-        Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
-        Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
-        List<Jogo> jogos = new ArrayList<>();
+        Model model = new Model();
+        //Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
+        //Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
+        //List<Jogo> jogos = new ArrayList<>();
         Equipa ultima = null; Jogador j = null;
         String[] linhaPartida;
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
             switch(linhaPartida[0]){
                 case "model.Equipa":
+                    model.addEquipa(ultima);
                     Equipa e = Equipa.parse(linhaPartida[1]);
-                    equipas.put(e.getNome(), e);
+                    //model.addEquipa(e);
                     ultima = e;
                     break;
                 case "Guarda-Redes":
                     j = GuardaRedes.parse(linhaPartida[1]);
-                    jogadores.put(j.getNumeroJogador(), j);
+                    model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "model.Defesa":
+                case "Defesa":
                     j = Defesa.parse(linhaPartida[1]);
-                    jogadores.put(j.getNumeroJogador(), j);
+                    model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "model.Medio":
                     j = Medio.parse(linhaPartida[1]);
-                    jogadores.put(j.getNumeroJogador(), j);
+                    model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "model.Lateral":
                     j = Lateral.parse(linhaPartida[1]);
-                    jogadores.put(j.getNumeroJogador(), j);
+                    model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "model.Avancado":
                     j = Avancado.parse(linhaPartida[1]);
-                    jogadores.put(j.getNumeroJogador(), j);
+                    model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "model.Jogo":
                     Jogo jo = Jogo.parse(linhaPartida[1]);
-                    jogos.add(jo);
+                    model.addJogo(jo);
                     break;
                 //default:
                  //   throw new LinhaIncorretaException();
@@ -81,6 +83,7 @@ public class Parser {
         for (model.Jogo jog: jogos){
             System.out.println(jog.toString());
         }*/
+        return model;
     }
 
     public static List<String> lerFicheiro(String nomeFich) {

@@ -37,4 +37,16 @@ public class Model {
         this.jogos = new ArrayList<>();
         games.forEach(jogo -> this.jogos.add(jogo));
     }
+
+    public void addEquipa(Equipa e){
+        this.equipas.put(e.getNome(), e);
+    }
+
+    public void addJogador(Jogador j){
+        this.jogadores.put(j.getNome(),j);
+    }
+
+    public void addJogo(Jogo j){
+        this.jogos.add(j);
+    }
 }
