@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+package model;
 
-public class Avancado extends Jogador{
+public class Avancado extends Jogador {
     private int finalizaco;
 
     public Avancado(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int jogo_cabeça, int remate, int passe) {

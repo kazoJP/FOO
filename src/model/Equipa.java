@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,16 +29,16 @@ public class Equipa {
         jogadores.add(j.clone());
     }
 
-    /*public ArrayList<Jogador> getJogadores() {
+    /*public ArrayList<model.Jogador> getJogadores() {
         return jogadores;
     }*/
 
-    /*public void setJogadores(ArrayList<Jogadores_Equipa> jogadores) {
+    /*public void setJogadores(ArrayList<model.Jogadores_Equipa> jogadores) {
         this.jogadores = jogadores;
     }*/
 
     public String toString(){
-        String r =  "Equipa:" + nome + "\n";
+        String r =  "model.Equipa:" + nome + "\n";
         for (Jogador j : jogadores){
             r += j.toString();
         }

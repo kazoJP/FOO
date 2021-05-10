@@ -1,4 +1,5 @@
-import java.sql.Time;
+package model;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,37 +56,37 @@ public class Jogo {
     }
 
     public String toString() {
-        return  "Jogo:" + equipaCasa + " - " + equipaFora;
+        return  "model.Jogo:" + equipaCasa + " - " + equipaFora;
         //+ " -> " + substituicoesCasa.toString()
         //+ " -> " + substitucoesFora.toString();
     }
 
 }
 
-/*public class Jogo {
-    private Estatistica_Equipa equipa_casa;
-    private Estatistica_Equipa equipa_fora;
+/*public class model.Jogo {
+    private model.Estatistica_Equipa equipa_casa;
+    private model.Estatistica_Equipa equipa_fora;
     private LocalDate tempo;
 
-    public Jogo(Estatistica_Equipa equipa_casa, Estatistica_Equipa equipa_fora, LocalDate tempo) {
+    public model.Jogo(model.Estatistica_Equipa equipa_casa, model.Estatistica_Equipa equipa_fora, LocalDate tempo) {
         this.equipa_casa = equipa_casa;
         this.equipa_fora = equipa_fora;
         this.tempo = tempo;
     }
 
-    public Estatistica_Equipa getEquipa_casa() {
+    public model.Estatistica_Equipa getEquipa_casa() {
         return equipa_casa;
     }
 
-    public void setEquipa_casa(Estatistica_Equipa equipa_casa) {
+    public void setEquipa_casa(model.Estatistica_Equipa equipa_casa) {
         this.equipa_casa = equipa_casa;
     }
 
-    public Estatistica_Equipa getEquipa_fora() {
+    public model.Estatistica_Equipa getEquipa_fora() {
         return equipa_fora;
     }
 
-    public void setEquipa_fora(Estatistica_Equipa equipa_fora) {
+    public void setEquipa_fora(model.Estatistica_Equipa equipa_fora) {
         this.equipa_fora = equipa_fora;
     }
 }

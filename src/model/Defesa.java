@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+package model;
 
-public class Defesa extends Jogador{
+public class Defesa extends Jogador {
     private int corte;
 
     public Defesa(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int jogo_cabeça, int remate, int passe) {

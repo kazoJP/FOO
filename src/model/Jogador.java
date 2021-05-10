@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package model;
+
 import java.util.Objects;
 
 
@@ -135,7 +136,7 @@ public class Jogador {
 
    /* @Override
     public String toString() {
-        return "Jogador{" +
+        return "model.Jogador{" +
                 " nome='" + nome + '\'' +
                 ", resistencia=" + resistencia +
                 ", destreza=" + destreza +
@@ -152,7 +153,7 @@ public class Jogador {
     }
 
     @Override
-    protected Jogador clone(){
+    public Jogador clone(){
         return new Jogador(this);
     }
 }

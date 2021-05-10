@@ -1,3 +1,7 @@
+package model;
+
+import model.Elenco;
+
 public class Estatistica_Equipa {
     private String Equipa;
     private int pontos;

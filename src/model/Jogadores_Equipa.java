@@ -1,3 +1,7 @@
+package model;
+
+import model.*;
+
 import java.util.ArrayList;
 
 public class Jogadores_Equipa {

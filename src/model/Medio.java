@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package model;
 
 public class Medio extends Jogador {
     private int recuperacao;

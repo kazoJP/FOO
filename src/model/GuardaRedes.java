@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+package model;
 
-public class GuardaRedes extends Jogador{
+public class GuardaRedes extends Jogador {
     private int elasticidade;
 
     public GuardaRedes(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeca, int remate, int passe, int elasticidade) {

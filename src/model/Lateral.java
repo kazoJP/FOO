@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+package model;
 
-public class Lateral extends Jogador{
+public class Lateral extends Jogador {
     private int cruzamento;
 
     public Lateral(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeça, int remate, int passe,int cruzamento) {
