@@ -12,6 +12,16 @@ public class Equipa {
         jogadores = new ArrayList<>();
     }
 
+    public Equipa(String nome, ArrayList<Jogador> jogadores){
+        this.nome = nome;
+        jogadores.forEach(jogador -> this.jogadores.add(jogador.clone()));
+    }
+
+    public Equipa(Equipa e){
+        this.nome = e.getNome();
+        e.jogadores.forEach(jogador -> this.jogadores.add(jogador.clone()));
+    }
+
     public static Equipa parse(String input){
         String[] campos = input.split(",");
         return new Equipa(campos[0]);
@@ -43,5 +53,10 @@ public class Equipa {
             r += j.toString();
         }
         return r;
+    }
+
+    @Override
+    public Equipa clone(){
+        return new Equipa(this);
     }
 }

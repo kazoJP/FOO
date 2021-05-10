@@ -29,6 +29,55 @@ public class Jogo {
         substitucoesFora = new HashMap<>(sf);
     }
 
+    public Jogo(Jogo game){
+        this.equipaCasa = getEquipaCasa();
+        this.equipaFora = getEquipaFora();
+        this.golosCasa = getGolosCasa();
+        this.golosFora = getGolosFora();
+        this.date = LocalDate.now();
+
+    }
+
+    public String getEquipaCasa() {
+        return equipaCasa;
+    }
+
+    public void setEquipaCasa(String equipaCasa) {
+        this.equipaCasa = equipaCasa;
+    }
+
+    public String getEquipaFora() {
+        return equipaFora;
+    }
+
+    public void setEquipaFora(String equipaFora) {
+        this.equipaFora = equipaFora;
+    }
+
+    public int getGolosCasa() {
+        return golosCasa;
+    }
+
+    public void setGolosCasa(int golosCasa) {
+        this.golosCasa = golosCasa;
+    }
+
+    public int getGolosFora() {
+        return golosFora;
+    }
+
+    public void setGolosFora(int golosFora) {
+        this.golosFora = golosFora;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public static Jogo parse(String input){
         String[] campos = input.split(",");
         String[] data = campos[4].split("-");
@@ -61,6 +110,9 @@ public class Jogo {
         //+ " -> " + substitucoesFora.toString();
     }
 
+    public Jogo clone(){
+        return new Jogo(this);
+    }
 }
 
 /*public class model.Jogo {
