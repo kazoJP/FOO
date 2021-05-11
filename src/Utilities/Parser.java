@@ -1,4 +1,7 @@
+package Utilities;
+
 import model.*;
+import model.exceptions.LinhaIncorretaException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -12,9 +15,9 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Model parse() throws LinhaIncorretaException, LinhaIncorretaException {
+    public static void parse(Model model) throws LinhaIncorretaException, LinhaIncorretaException {
         List<String> linhas = lerFicheiro("/home/josepeixoto/Kazo/poo/FOO/files/output.txt");
-        Model model = new Model();
+        //Model model = new Model();
         //Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         //Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         //List<Jogo> jogos = new ArrayList<>();
@@ -23,8 +26,8 @@ public class Parser {
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
             switch(linhaPartida[0]){
-                case "model.Equipa":
-                    model.addEquipa(ultima);
+                case "Equipa":
+                    if (ultima!=null) model.addEquipa(ultima);
                     Equipa e = Equipa.parse(linhaPartida[1]);
                     //model.addEquipa(e);
                     ultima = e;
@@ -41,39 +44,34 @@ public class Parser {
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "model.Medio":
+                case "Medio":
                     j = Medio.parse(linhaPartida[1]);
                     model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "model.Lateral":
+                case "Lateral":
                     j = Lateral.parse(linhaPartida[1]);
                     model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "model.Avancado":
+                case "Avancado":
                     j = Avancado.parse(linhaPartida[1]);
                     model.addJogador(j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "model.Jogo":
+                case "Jogo":
                     Jogo jo = Jogo.parse(linhaPartida[1]);
                     model.addJogo(jo);
                     break;
                 //default:
-                 //   throw new LinhaIncorretaException();
+                 //   throw new model.exceptions.LinhaIncorretaException();
 
             }
 
-            /*for(Map.Entry<String, Equipa> entry : equipas.entrySet()) {
-                String key = entry.getKey();
-                Equipa value = entry.getValue();
-                System.out.println(key.toString());
-                //value.toString();
-            }*/
+
         }
 
         //debug
@@ -83,7 +81,7 @@ public class Parser {
         for (model.Jogo jog: jogos){
             System.out.println(jog.toString());
         }*/
-        return model;
+        //return model;
     }
 
     public static List<String> lerFicheiro(String nomeFich) {

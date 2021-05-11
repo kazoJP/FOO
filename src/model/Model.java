@@ -49,4 +49,10 @@ public class Model {
     public void addJogo(Jogo j){
         this.jogos.add(j);
     }
+
+    public HashMap<String, Equipa> getEquipas(){
+        return (HashMap) this.equipas;
+    }
+
+
 }

@@ -1,3 +1,5 @@
+package model.exceptions;
+
 public class LinhaIncorretaException extends Exception {
     public LinhaIncorretaException(){
         super();
