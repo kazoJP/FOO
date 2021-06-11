@@ -16,7 +16,7 @@ public class GuardaRedes extends Jogador {
         this.elasticidade = elasticidade;
     }
 
-    public static GuardaRedes parse(String input){
+    public static GuardaRedes parse(String input) {
         String[] campos = input.split(",");
         return new GuardaRedes(campos[0], Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),

@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 
-public class Jogador {
+public class Jogador implements IJogador{
     
     private String nome;
     private int numeroJogador;
@@ -15,6 +15,18 @@ public class Jogador {
     private int remate;
     private int passe;
     //private ArrayList<String> historico_clubes;
+
+    public Jogador() {
+        this.nome = "";
+        this.numeroJogador = 0;
+        this.velocidade = 0;
+        this.resistencia = 0;
+        this.destreza = 0;
+        this.impulsao = 0;
+        this.cabeca = 0;
+        this.remate = 0;
+        this.passe = 0;
+    }
 
     public Jogador(String nome, int numeroJ, int velocidade, int resistencia, int destreza, int impulsao, int jogo_cabeça, int remate, int passe) {
         this.nome = nome;

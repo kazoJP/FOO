@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipa {
+public class Equipa implements IEquipa{
     private String nome;
     private List<Jogador> jogadores;
 
@@ -19,12 +19,13 @@ public class Equipa {
 
     public Equipa(Equipa e){
         this.nome = e.getNome();
-        e.jogadores.forEach(jogador -> this.jogadores.add(jogador.clone()));
-    }
-
-    public static Equipa parse(String input){
-        String[] campos = input.split(",");
-        return new Equipa(campos[0]);
+        this.jogadores= new ArrayList<>();
+        try {
+            e.jogadores.forEach(jogador -> this.jogadores.add(jogador));
+        }
+        catch (NullPointerException ex){
+            ex.printStackTrace();
+        };
     }
 
     public String getNome() {
@@ -35,7 +36,7 @@ public class Equipa {
         this.nome = nome;
     }
 
-    public void insereJogador(Jogador j) {
+    public void insereJogador(IJogador j) {
         jogadores.add(j.clone());
     }
 

@@ -1,4 +1,4 @@
-package Utilities;
+package model;
 
 import model.*;
 import model.exceptions.LinhaIncorretaException;
@@ -9,69 +9,68 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Parser {
 
-    public static void parse(Model model) throws LinhaIncorretaException, LinhaIncorretaException {
+    public static void parse(IModel model) throws LinhaIncorretaException, LinhaIncorretaException {
         List<String> linhas = lerFicheiro("/home/josepeixoto/Kazo/poo/FOO/files/output.txt");
         //Model model = new Model();
         //Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         //Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         //List<Jogo> jogos = new ArrayList<>();
-        Equipa ultima = null; Jogador j = null;
+        IEquipa ultima = null; Jogador j = null;
         String[] linhaPartida;
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
-            switch(linhaPartida[0]){
-                case "Equipa":
-                    if (ultima!=null) model.addEquipa(ultima);
-                    Equipa e = Equipa.parse(linhaPartida[1]);
+            switch (linhaPartida[0]) {
+                case "Equipa" -> {
+                    if (ultima != null) model.addEquipa(ultima.clone());
+                    IEquipa e = IEquipa.parse(linhaPartida[1]);
                     //model.addEquipa(e);
                     ultima = e;
-                    break;
-                case "Guarda-Redes":
+                }
+                case "Guarda-Redes" -> {
                     j = GuardaRedes.parse(linhaPartida[1]);
                     model.addJogador(j);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null)
+                        throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
-                    break;
-                case "Defesa":
+                }
+                case "Defesa" -> {
                     j = Defesa.parse(linhaPartida[1]);
                     model.addJogador(j);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null)
+                        throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
-                    break;
-                case "Medio":
+                }
+                case "Medio" -> {
                     j = Medio.parse(linhaPartida[1]);
                     model.addJogador(j);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null)
+                        throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
-                    break;
-                case "Lateral":
+                }
+                case "Lateral" -> {
                     j = Lateral.parse(linhaPartida[1]);
                     model.addJogador(j);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null)
+                        throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
-                    break;
-                case "Avancado":
+                }
+                case "Avancado" -> {
                     j = Avancado.parse(linhaPartida[1]);
                     model.addJogador(j);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null)
+                        throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
-                    break;
-                case "Jogo":
+                }
+                case "Jogo" -> {
                     Jogo jo = Jogo.parse(linhaPartida[1]);
                     model.addJogo(jo);
-                    break;
-                //default:
-                 //   throw new model.exceptions.LinhaIncorretaException();
-
+                }
+                //default -> throw new LinhaIncorretaException();
             }
-
-
         }
 
         //debug

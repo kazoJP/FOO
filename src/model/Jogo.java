@@ -14,8 +14,8 @@ public class Jogo {
     private LocalDate date;
     private List<Integer> jogadoresCasa;
     private List<Integer> jogadoresFora;
-    Map<Integer, Integer> substituicoesCasa = new HashMap<>();
-    Map<Integer, Integer> substituicoesFora = new HashMap<>();
+    private Map<Integer, Integer> substituicoesCasa;
+    private Map<Integer, Integer> substituicoesFora;
 
     public Jogo (String ec, String ef, int gc, int gf, LocalDate d,  List<Integer> jc, Map<Integer, Integer> sc,  List<Integer> jf, Map<Integer, Integer> sf){
         equipaCasa = ec;
@@ -30,15 +30,24 @@ public class Jogo {
     }
 
     public Jogo(Jogo game){
-        this.equipaCasa = getEquipaCasa();
-        this.equipaFora = getEquipaFora();
-        this.golosCasa = getGolosCasa();
-        this.golosFora = getGolosFora();
-        this.date = LocalDate.now();
-        game.jogadoresCasa.forEach(integer -> this.jogadoresCasa.add(integer));
-        game.jogadoresFora.forEach(integer -> this.jogadoresFora.add(integer));
-        game.substituicoesCasa.forEach((k,v) -> this.substituicoesCasa.put(k,v));
-        game.substituicoesFora.forEach((k,v) -> this.substituicoesFora.put(k,v));
+        try {
+            this.jogadoresCasa= new ArrayList<>();
+            this.jogadoresFora=new ArrayList<>();
+            this.substituicoesCasa= new HashMap<>();
+            this.substituicoesFora= new HashMap<>();
+            this.equipaCasa = getEquipaCasa();
+            this.equipaFora = getEquipaFora();
+            this.golosCasa = getGolosCasa();
+            this.golosFora = getGolosFora();
+            this.date = LocalDate.now();
+            this.jogadoresCasa.addAll(game.jogadoresCasa);
+            this.jogadoresFora.addAll(game.jogadoresFora);
+            this.substituicoesCasa.putAll(game.substituicoesCasa);
+            this.substituicoesFora.putAll(game.substituicoesFora);
+        }
+        catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getEquipaCasa() {
