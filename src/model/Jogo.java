@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Jogo {
     private String equipaCasa;
@@ -97,6 +98,7 @@ public class Jogo {
         List<Integer> jf = new ArrayList<>();
         Map<Integer, Integer> subsC = new HashMap<>();
         Map<Integer, Integer> subsF = new HashMap<>();
+
         for (int i = 5; i < 16; i++){
             jc.add(Integer.parseInt(campos[i]));
         }
@@ -111,15 +113,25 @@ public class Jogo {
             String[] sub = campos[i].split("->");
             subsF.put(Integer.parseInt(sub[0]), Integer.parseInt(sub[1]));
         }
-        return new Jogo(campos[0], campos[1], Integer.parseInt(campos[2]), Integer.parseInt(campos[3]),
-                LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
-                jc, subsC, jf, subsF);
+        return new Jogo(campos[0],
+                        campos[1],
+                        Integer.parseInt(campos[2]),
+                        Integer.parseInt(campos[3]),
+                        LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
+                        jc, subsC, jf, subsF);
     }
 
     public String toString() {
-        return  "model.Jogo:" + equipaCasa + " - " + equipaFora;
-        //+ " -> " + substituicoesCasa.toString()
-        //+ " -> " + substitucoesFora.toString();
+        return  "Jogo:" + this.equipaCasa + "," + this.equipaFora + "," +
+                this.golosCasa + "," + this.golosFora + "," + this.date + "," +
+                jogadoresCasa.stream().map(Object::toString).collect(Collectors.joining(",")) + "," +
+                substituicoesCasa.entrySet().stream().map(
+                        e -> e.getKey().toString() + "->" + e.getValue().toString()
+                ).collect(Collectors.joining(",")) + "," +
+                jogadoresFora.stream().map(Object::toString).collect(Collectors.joining(",")) + "," +
+                substituicoesFora.entrySet().stream().map(
+                        e -> e.getKey().toString() + "->" + e.getValue().toString()
+                ).collect(Collectors.joining(","));
     }
 
     public Jogo clone(){

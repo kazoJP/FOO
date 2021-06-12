@@ -7,6 +7,13 @@ public class Medio extends Jogador {
         recuperacao = rec;
     }
 
+    public int getScore(){
+        return super.getVelocidade() + super.getResistencia()*2 +
+                super.getDestreza()*2 + super.getImpulsao() +
+                super.getCabeca()*2 + super.getRemate() +
+                super.getPasse()*3+this.recuperacao*3;
+    }
+
     public static Medio parse(String input){
         String[] campos = input.split(",");
         return new Medio(campos[0], Integer.parseInt(campos[1]),
@@ -18,5 +25,9 @@ public class Medio extends Jogador {
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
                 Integer.parseInt(campos[9]));
+    }
+
+    public String toString() {
+        return "Medio:" + super.toString();
     }
 }

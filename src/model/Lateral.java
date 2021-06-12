@@ -16,6 +16,17 @@ public class Lateral extends Jogador {
         this.cruzamento = cruzamento;
     }
 
+    public int getScore(){
+        return super.getVelocidade()*3 + super.getResistencia()* +
+                super.getDestreza()*2 + super.getImpulsao()*3 +
+                super.getCabeca() + super.getRemate()*2 +
+                super.getPasse()*3 + this.cruzamento*3;
+    }
+
+
+
+
+
     public static Lateral parse(String input){
         String[] campos = input.split(",");
         return new Lateral(campos[0], Integer.parseInt(campos[1]),
@@ -27,5 +38,8 @@ public class Lateral extends Jogador {
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
                 Integer.parseInt(campos[9]));
+    }
+    public String toString() {
+        return "Lateral:" + super.toString();
     }
 }

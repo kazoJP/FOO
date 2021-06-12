@@ -1,5 +1,7 @@
 import controller.Controller;
 import controller.IController;
+import model.Equipa;
+import model.IEquipa;
 import model.IModel;
 import model.Model;
 import view.View;

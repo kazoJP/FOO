@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map;
+
 public interface IEquipa {
 
     public static Equipa parse(String input){
@@ -11,6 +13,10 @@ public interface IEquipa {
     public void setNome(String nome);
 
     public void insereJogador(IJogador j);
+
+    public IJogador getJogador(String nome);
+
+    public Map<String,IJogador> getJogadores();
 
     public Equipa clone();
 }

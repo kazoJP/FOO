@@ -16,6 +16,19 @@ public class GuardaRedes extends Jogador {
         this.elasticidade = elasticidade;
     }
 
+    public int getScore(){
+        return super.getVelocidade() + super.getResistencia() +
+                super.getDestreza()*2 + super.getImpulsao() +
+                super.getCabeca()*2 + super.getRemate() +
+                super.getPasse()*3 +this.elasticidade*3;
+    }
+
+
+
+
+
+
+
     public static GuardaRedes parse(String input) {
         String[] campos = input.split(",");
         return new GuardaRedes(campos[0], Integer.parseInt(campos[1]),
@@ -27,6 +40,9 @@ public class GuardaRedes extends Jogador {
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
                 Integer.parseInt(campos[9]));
+    }
+    public String toString() {
+        return "GuardaRedes:" + super.toString();
     }
 }
 

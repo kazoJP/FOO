@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -125,6 +126,16 @@ public class Jogador implements IJogador{
         this.passe = passe;
     }
 
+    public int getScore() {
+        return this.getVelocidade() * 3 + this.getResistencia() * +
+                this.getDestreza() * 2 + this.getImpulsao() * 3 +
+                this.getCabeca() * 3 + this.getRemate() * 3 +
+                this.getPasse() * 2;
+    }
+
+
+
+
     /*public ArrayList<String> getHistorico_clubes() {
         return historico_clubes;
     }*/
@@ -146,24 +157,16 @@ public class Jogador implements IJogador{
         return Objects.hash(nome, resistencia, destreza, impulsao, cabeca, remate, passe);
     }
 
-   /* @Override
+    @Override
     public String toString() {
-        return "model.Jogador{" +
-                " nome='" + nome + '\'' +
-                ", resistencia=" + resistencia +
-                ", destreza=" + destreza +
-                ", impulsao=" + impulsao +
-                ", cabeça=" + cabeca +
-                ", remate=" + remate +
-                ", passe=" + passe +
-                //", historico_clubes=" + historico_clubes +
-                '}';
-    }*/
-
-    public String toString(){
-        return nome +"\n";
+        return   nome + ',' + resistencia + ',' + destreza + ',' +
+                 impulsao + ',' + cabeca + ',' + remate + ',' + passe + '\n';
     }
 
+   /* public String toString(){
+        return nome +"\n";
+    }
+*/
     @Override
     public Jogador clone(){
         return new Jogador(this);

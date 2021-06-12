@@ -16,6 +16,13 @@ public class Avancado extends Jogador {
         this.finalizaco = finalizaco;
     }
 
+    public int getScore(){
+        return super.getVelocidade()*3 + super.getResistencia()* +
+                super.getDestreza()*2 + super.getImpulsao()*3 +
+                super.getCabeca()*3 + super.getRemate()*3 +
+                super.getPasse()*2;
+    }
+
     public static Avancado parse(String input){
         String[] campos = input.split(",");
         return new Avancado(campos[0], Integer.parseInt(campos[1]),
@@ -27,6 +34,8 @@ public class Avancado extends Jogador {
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]));
     }
-
+    public String toString() {
+        return "Avancado:" + super.toString();
+    }
 }
 

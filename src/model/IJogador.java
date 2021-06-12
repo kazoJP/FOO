@@ -38,5 +38,7 @@ public interface IJogador {
 
     public void setPasse(int passe);
 
+    public int getScore();
+
     public Jogador clone();
 }

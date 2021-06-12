@@ -9,7 +9,11 @@ public interface IController {
 
     public void run() throws ClassNotFoundException, IOException;
 
+    public void play();
+
     public void readFile();
+
+    public void writeFile();
 
     public void createTeam() throws IOException;
 
@@ -18,4 +22,8 @@ public interface IController {
     public void movePlayer() throws IOException;
 
     public void showTeam() throws IOException, EquipaNaoExisteException;
+
+    public void showTeamList();
+
+   // public void showJogos();
 }

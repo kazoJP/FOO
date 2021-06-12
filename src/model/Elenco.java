@@ -3,27 +3,27 @@ package model;
 import java.util.ArrayList;
 
 public class Elenco {
-    private ArrayList<Jogador> titulares;
-    private ArrayList<Jogador> suplentes;
+    private ArrayList<Integer> titulares;
+    private ArrayList<Integer> suplentes;
 
-    public Elenco(ArrayList<Jogador> titulares, ArrayList<Jogador> suplentes) {
+    public Elenco(ArrayList<Integer> titulares, ArrayList<Integer> suplentes) {
         this.titulares = titulares;
         this.suplentes = suplentes;
     }
 
-    public ArrayList<Jogador> getTitulares() {
+    public ArrayList<Integer> getTitulares() {
         return titulares;
     }
 
-    public void setTitulares(ArrayList<Jogador> titulares) {
+    public void setTitulares(ArrayList<Integer> titulares) {
         this.titulares = titulares;
     }
 
-    public ArrayList<Jogador> getSuplentes() {
+    public ArrayList<Integer> getSuplentes() {
         return suplentes;
     }
 
-    public void setSuplentes(ArrayList<Jogador> suplentes) {
+    public void setSuplentes(ArrayList<Integer> suplentes) {
         this.suplentes = suplentes;
     }
 }

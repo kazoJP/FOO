@@ -16,9 +16,17 @@ public class Defesa extends Jogador {
         this.corte = corte;
     }
 
+    public int getScore(){
+        return super.getVelocidade()*2 + super.getResistencia()* +
+                super.getDestreza()*3 + super.getImpulsao() +
+                super.getCabeca()*3 + super.getRemate() +
+                super.getPasse()*3;
+    }
+
     public static Defesa parse(String input){
         String[] campos = input.split(",");
-        return new Defesa(campos[0], Integer.parseInt(campos[1]),
+        return new Defesa(campos[0],
+                Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),
@@ -26,5 +34,8 @@ public class Defesa extends Jogador {
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]));
+    }
+    public String toString() {
+        return "Defesa:" + super.toString();
     }
 }

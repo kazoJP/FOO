@@ -10,11 +10,19 @@ import view.Input;
 import view.Output;
 import view.View;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 public class Controller implements IController {
 
@@ -41,6 +49,21 @@ public class Controller implements IController {
             else if (input[0].equals("clear")) Output.clear();
             else callMethod(Class.forName("controller.IController"), methods, input);
         } while (!utilities.Tools.isExit(input[0]));
+    }
+
+    public void play(){
+        try{
+            System.out.println("Equipa da casa");
+            String ec = Input.readln();
+            System.out.println("Equipa da fora");
+            String ef = Input.readln();
+            LocalDate data = LocalDate.now();
+            Elenco elc = model.fazElenco(ec);
+            Elenco elf = model.fazElenco(ef);
+            model.result(elc,elf,ec,ef);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void showMethods(Method[] methods) throws ClassNotFoundException {
@@ -153,10 +176,31 @@ public class Controller implements IController {
     */
 
     public void readFile(){
+        model.reset();
         try {
-            Parser.parse(model);
-        } catch (LinhaIncorretaException e){
+            System.out.println("Nome do ficheiro");
+            String path = Input.readln();
+            Parser.parse(model,path);
+        } catch (IOException | LinhaIncorretaException e){
             Output.error(Config.InvalidFile);
+            e.printStackTrace();
+        }
+    }
+
+    public void writeFile(){
+        String txt;
+        txt = model.getEquipas().entrySet().stream().map(
+                e->e.getValue().toString()
+                ).collect(Collectors.joining());
+        try{
+            System.out.println("Nome do ficheiro");
+            String path = Input.readln();
+            File f = new File(path);
+            FileWriter writer = new FileWriter(path);
+            writer.write(txt);
+            writer.close();
+        } catch (IOException e){
+            System.out.println("Occurreu um erro.");
             e.printStackTrace();
         }
     }
@@ -190,32 +234,39 @@ public class Controller implements IController {
             switch (posicao) {
                 case "GuardaRedes":
                     Output.showln(Config.GuardaRedes);
-                    var statsG = Input.readln();
+                    String statsG = Input.readln();
                     jog = GuardaRedes.parse(statsG);
                     break;
                 case "Defesa":
                     Output.showln(Config.Jogador);
-                    var statsD = Input.readln();
+                    String statsD = Input.readln();
                     jog = Defesa.parse(statsD);
                     break;
                 case "Medio":
                     Output.showln(Config.Medio);
-                    var statsM = Input.readln();
+                    String statsM = Input.readln();
                     jog = Medio.parse(statsM);
                     break;
                 case "Lateral":
                     Output.showln(Config.Lateral);
-                    var statsL = Input.readln();
+                    String statsL = Input.readln();
                     jog = Lateral.parse(statsL);
                     break;
                 case "Avancado":
                     Output.showln(Config.Jogador);
-                    var statsA = Input.readln();
+                    String statsA = Input.readln();
                     jog = Avancado.parse(statsA);
                 default:
                     throw new UserInputException("Wrong position");
             }
-            model.addJogador(jog);
+            if(model.getEquipas().get("")!=null) {
+                model.getEquipas().get("").insereJogador(jog);
+            }
+            else {
+                IEquipa noteam = new Equipa("");
+                noteam.insereJogador(jog);
+                model.addEquipa(noteam);
+            }
         } catch (UserInputException e) {
             Output.error(Config.InvalidInput);
             e.printStackTrace();
@@ -246,8 +297,10 @@ public class Controller implements IController {
 
     public void showTeam() throws IOException, EquipaNaoExisteException {
         for (IEquipa e:model.getEquipas().values()) {
-            Output.show(e.getNome());
-            Output.space();
+            if(!e.getNome().equals("")) {
+                Output.show(e.getNome());
+                Output.space();
+            }
         }
         Output.show("nome de equipa a consultar\n");
         String team = Input.readln();
@@ -259,4 +312,16 @@ public class Controller implements IController {
             Output.show(Config.noTeam);
         }
     }
+
+    public void showTeamList(){
+        for (IEquipa e: model.getEquipas().values()) {
+            if (!e.getNome().equals("")) {
+                System.out.println(e.getNome());
+            }
+        }
+    }
+
+ //   public void showJogos(){
+ //       model.getJogos().forEach(j->System.out.println(j.toString()));
+ //   }
 }
